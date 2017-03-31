@@ -3,11 +3,11 @@ from database.postgre_connection import PostgreConnection
 
 class Tournament():
     """
-    
+    Class that contains all operations to realize a tournament.
     """
 
     def execute_not_read_only_query(self, query):
-        connection = PostgreConnection.get_connection();
+        connection = PostgreConnection.get_connection()
 
         cursor = connection.cursor()
         cursor.execute(query)
@@ -15,13 +15,12 @@ class Tournament():
         connection.commit()
 
     def execute_read_only_query(self, query):
-        connection = PostgreConnection.get_connection();
+        connection = PostgreConnection.get_connection()
 
         cursor = connection.cursor()
         cursor.execute(query)
 
         return cursor.fetchall()
-
 
     def delete_players(self):
         """
@@ -43,21 +42,21 @@ class Tournament():
         :return: 
         """
 
-    def registerPlayer(self):
+    def register_player(self):
         """
         Adds a player to the tournament database.
         :return: 
         """
         print
 
-    def playerStandings(self):
+    def player_standings(self):
         """
         Returns a list of the players and their win records, sorted by wins. 
         :return: 
         """
         print()
 
-    def report_match(self):
+    def report_matches(self):
         """
         This is to simply populate the matches table and record the winner 
         and loser as (winner,loser) in the insert statement.
