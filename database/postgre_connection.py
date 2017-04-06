@@ -5,7 +5,6 @@ class PostgreConnection():
     """
     Class used to connect on database and return the connection object
     """
-
     hostname = 'localhost'
     username = 'postgres'
     password = '4dm1n'
@@ -20,11 +19,13 @@ class PostgreConnection():
         """
         if not PostgreConnection.connection:
             try:
-                connection = psycopg2.connect(host=PostgreConnection.hostname,
-                                              user=PostgreConnection.username,
-                                              password=PostgreConnection.password,
-                                              dbname=PostgreConnection.database)
+                connection = psycopg2\
+                    .connect(host=PostgreConnection.hostname,
+                             user=PostgreConnection.username,
+                             password=PostgreConnection.password,
+                             dbname=PostgreConnection.database)
             except:
-                print "Cannot to connect to the database: " + PostgreConnection.database
+                print "Cannot to connect to the database: " + \
+                      PostgreConnection.database
 
         return connection
