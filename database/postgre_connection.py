@@ -1,14 +1,12 @@
 import psycopg2
 
 
-class PostgreConnection():
+class PostgreConnection:
     """
     Class used to connect on database and return the connection object
     """
-    hostname = 'localhost'
-    username = 'postgres'
-    password = '4dm1n'
-    database = 'TOURNAMENT'
+    database_dict = dict(line.strip().split('=') for line in open('database.properties'))
+
     connection = None
 
     @staticmethod
@@ -17,15 +15,15 @@ class PostgreConnection():
         Method that returns the open connection to the database
         :return: Connection
         """
-        if not PostgreConnection.connection:
-            try:
-                connection = psycopg2\
-                    .connect(host=PostgreConnection.hostname,
-                             user=PostgreConnection.username,
-                             password=PostgreConnection.password,
-                             dbname=PostgreConnection.database)
-            except:
-                print "Cannot to connect to the database: " + \
-                      PostgreConnection.database
+        try:
+            if not PostgreConnection.connection:
+                connection = psycopg2.connect(
+                    host=PostgreConnection.database_dict.get("hostname"),
+                    user=PostgreConnection.database_dict.get("username"),
+                    password=PostgreConnection.database_dict.get("password"),
+                    dbname=PostgreConnection.database_dict.get("database"))
+        except:
+            print "Cannot to connect to the database: " + \
+                  PostgreConnection.database_dict.get("database")
 
         return connection
